@@ -1,4 +1,4 @@
-const User = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     displayName: DataTypes.STRING,
     email: { type: DataTypes.STRING, unique: true },
@@ -17,4 +17,4 @@ const User = (sequelize, DataTypes) => {
       { foreignKey: 'userId', as: 'blogposts' });
   };
   return User;
-}
+};
