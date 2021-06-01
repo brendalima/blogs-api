@@ -24,6 +24,7 @@ router
 
 router
   .route('/post')
-  .post(validateJWT, postController.createPost);
+  .post(validateJWT, postController.createPost)
+  .get(validateJWT, postController.getAllPosts);
 
 module.exports = router;
