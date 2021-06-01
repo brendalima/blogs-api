@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const categoryController = require('../controllers/categoryController');
 const validateJWT = require('../auth/validateJWT');
 
 const router = express.Router();
@@ -14,5 +15,9 @@ router
   .get(validateJWT, userController.getUser);
 
 router.post('/login', userController.login);
+
+router
+  .route('/categories')
+  .post(validateJWT, categoryController.createCategory);
 
 module.exports = router;
