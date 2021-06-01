@@ -31,7 +31,19 @@ const login = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    // following line from @vanessanaara
+    const results = await User.findAll({ attributes: { exclude: ['password'] } });
+    
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = { 
   createUser,
   login,
+  getAllUsers,
 };
