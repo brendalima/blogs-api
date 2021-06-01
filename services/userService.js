@@ -31,11 +31,13 @@ const lengthIsValid = (displayName, password) => {
 const validateUser = (email, password) => {
   if (!requiredField(email)) return '"email" is required'; // 400
   if (!requiredField(password)) return '"password" is required'; // 400
-  if (!emailIsValid(email)) return '"email" must be a valid email'; // 400
+  if (email === '') return '"email" is not allowed to be empty'; // 400
+  if (password === '') return '"password" is not allowed to be empty'; // 400
   return null;
 };
 
 const emailExists = async (email) => {
+  if (!emailIsValid(email)) return '"email" must be a valid email'; // 400
   const emailCheck = await User.findOne({ where: { email } });
   if (emailCheck) {
     return 'User already registered'; // 409
@@ -59,7 +61,16 @@ const generateToken = (email, password) => {
   return token;
 };
 
+const loginFieldsCheck = async (email, password) => {
+  const userIsValidated = validateUser(email, password);
+  if (userIsValidated) return userIsValidated;
+  const existingEmail = await emailExists(email);
+  if (!existingEmail) return 'Invalid fields'; // 400  
+  return null;
+};
+
 module.exports = {
   verifyUserInput,
   generateToken,
+  loginFieldsCheck,
 };

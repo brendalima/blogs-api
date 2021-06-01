@@ -10,7 +10,7 @@ router
   .post(userController.createUser);
   // .put(validateJWT, userController.editUser);
 
-// router.post('/login', userController.login);
+router.post('/login', userController.login);
 // router.post('/users/admin', validateJWT, validateAdmin, usersController.createAdmin); 
 
 module.exports = router;
