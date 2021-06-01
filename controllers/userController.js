@@ -42,8 +42,24 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    // following line from @vanessanaara
+    const results = await User.findByPk(id, {
+      attributes: { exclude: ['password'] }, 
+    });
+    if (!results) throw new Error('User does not exist');
+    
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
 module.exports = { 
   createUser,
   login,
   getAllUsers,
+  getUser,
 };

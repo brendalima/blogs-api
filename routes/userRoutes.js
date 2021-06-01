@@ -8,9 +8,11 @@ router
   .route('/user')
   .post(userController.createUser)
   .get(validateJWT, userController.getAllUsers);
-  // .put(validateJWT, userController.editUser);
+
+router
+  .route('/user/:id')
+  .get(validateJWT, userController.getUser);
 
 router.post('/login', userController.login);
-// router.post('/users/admin', validateJWT, validateAdmin, usersController.createAdmin); 
 
 module.exports = router;
