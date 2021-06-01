@@ -18,6 +18,7 @@ router.post('/login', userController.login);
 
 router
   .route('/categories')
-  .post(validateJWT, categoryController.createCategory);
+  .post(validateJWT, categoryController.createCategory)
+  .get(validateJWT, categoryController.getAllCategories);
 
 module.exports = router;
