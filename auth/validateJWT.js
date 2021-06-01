@@ -10,7 +10,7 @@ const validateToken = async (req, res, next) => {
     if (!token) throw Error('Token not found');
     const decoded = jwt.verify(token, JWT_SECRET);
     if (!decoded) throw Error('Expired or invalid token');
-    const {email} = decoded;
+    const { email } = decoded;
     const user = await User.findOne({ where: { email } });
 
     req.user = user;

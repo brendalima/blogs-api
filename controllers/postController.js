@@ -4,7 +4,7 @@ const { BlogPost, PostsCategory } = require('../models');
 const createPost = async (req, res) => {
   try {
     const { title, content, categoryIds } = req.body;
-    const {id: userId} = req.user;
+    const { id: userId } = req.user;
 
     const result = await postService.verifyInput(title, content, categoryIds);
     if (result) throw new Error(result);
